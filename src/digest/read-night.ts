@@ -30,6 +30,10 @@ function parseLine(raw: string): Line | null {
   };
 }
 
+export function lineStatus(raw: string): RunStatus | null {
+  return parseLine(raw)?.status ?? null;
+}
+
 // A missing night file rejects with the original fs error (code 'ENOENT') so routes can answer 404.
 export async function readNight(runsDir: string, night: string): Promise<NightRead> {
   const text = await readFile(join(runsDir, `${night}.jsonl`), 'utf8');
